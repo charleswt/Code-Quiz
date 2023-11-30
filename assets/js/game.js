@@ -11,7 +11,7 @@ let questions = [
   {
     question: "Inside which HTML element do we put the Javascript ??",
     choice1: "<script>",
-    choice2: "<javascreipt>",
+    choice2: "<javascript>",
     choice3: "<js>",
     choice4: "<scripting>",
     answer: 1
@@ -46,6 +46,10 @@ startGame = () => {
 };
 
 getNewQuestion = () => {
+    if (availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
+        // go to the end page
+        return window.location.assign("/end.html"); 
+    }
   questionCounter++;
   const questionIndex = Math.floor(Math.random() * availableQuestions.length);
   currentQuestion = availableQuestions[questionIndex];
@@ -68,12 +72,18 @@ getNewQuestion = () => {
             acceptingAnswers = false;
             const selectedChoice = e.target;
             const selectedAnswer = selectedChoice.dataset["number"];
-            console.log(selectedAnswer);
+          
+            const classToApply =
+            selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
+
+            selectedChoice.parentElement.classList.add(classToApply);
+
+            setTimeout(() => {
+            selectedChoice.parentElement.classList.remove(classToApply);
             getNewQuestion();
-        })
-    })
+            }, 1000);
+        });
+    });
 
 
 startGame();
-
-console.log('Hello World!');
