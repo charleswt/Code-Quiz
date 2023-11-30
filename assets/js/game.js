@@ -1,5 +1,7 @@
 const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
+const questionCounterText = document.getElementById('questionCounter');
+const scoreText = document.getElementById('score');
 
 let currentQuestion = {};
 let acceptingAnswers = true;
@@ -51,6 +53,8 @@ getNewQuestion = () => {
         return window.location.assign("/end.html"); 
     }
   questionCounter++;
+  questionCounterText.innerText = `${questionCounter}/${MAX_QUESTIONS}`;
+
   const questionIndex = Math.floor(Math.random() * availableQuestions.length);
   currentQuestion = availableQuestions[questionIndex];
   question.innerText = currentQuestion.question;
@@ -76,6 +80,10 @@ getNewQuestion = () => {
             const classToApply =
             selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
 
+            if (classToApply === 'correct') {
+                incrementScore(CORRECT_QUESTIONS);
+            }
+
             selectedChoice.parentElement.classList.add(classToApply);
 
             setTimeout(() => {
@@ -85,5 +93,34 @@ getNewQuestion = () => {
         });
     });
 
+    incrementScore = num => {
+        score += num;
+        scoreText.innerText = score;
+    };
+
+    function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+        setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+    
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+    
+            display.textContent = minutes + ":" + seconds;
+    
+            if (--timer < 0) {
+                timer = duration;
+            }
+        }, 1000);
+    }
+    
+    window.onload = function () {
+        var oneMinute = 60,
+            display = document.querySelector('#time');
+        startTimer(oneMinute, display);
+    };
+
+    if (selectedAnswer -- currentQuestion.answer)
 
 startGame();
