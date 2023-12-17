@@ -49,6 +49,7 @@ startGame = () => {
 
 getNewQuestion = () => {
     if (availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
+      localStorage.setItem('mostRecentScore', score);
         // go to the end page
         return window.location.assign("/end.html"); 
     }
@@ -82,6 +83,8 @@ getNewQuestion = () => {
 
             if (classToApply === 'correct') {
                 incrementScore(CORRECT_QUESTIONS);
+            } else if (classToApply === 'incorrect'){
+              minusTime();
             }
 
             selectedChoice.parentElement.classList.add(classToApply);
@@ -98,29 +101,30 @@ getNewQuestion = () => {
         scoreText.innerText = score;
     };
 
-    function startTimer(duration, display) {
-        var timer = duration, minutes, seconds;
-        setInterval(function () {
-            minutes = parseInt(timer / 60, 10);
-            seconds = parseInt(timer % 60, 10);
-    
-            minutes = minutes < 10 ? "0" + minutes : minutes;
-            seconds = seconds < 10 ? "0" + seconds : seconds;
-    
-            display.textContent = minutes + ":" + seconds;
-    
-            if (--timer < 0) {
-                timer = duration;
-            }
-        }, 1000);
-    }
-    
-    window.onload = function () {
-        var oneMinute = 60,
-            display = document.querySelector('#time');
-        startTimer(oneMinute, display);
+    minusTime = num => {
+      num = 10;
+      timeSecond -= num;
+      timeH.innerHTML = timeSecond + "s";
     };
 
-    if (selectedAnswer -- currentQuestion.answer)
+    const timeH = document.getElementById('timeLeft');
+    let timeSecond = 60;
+
+displayTime(timeSecond)
+
+    const countDown = setInterval (() =>{
+      timeSecond--;
+      displayTime(timeSecond)
+      if (timeSecond <= 0 || timeSecond< 1){
+        clearInterval(countDown);
+        localStorage.setItem('mostRecentScore', score);
+      return window.location.assign("/end.html");
+      }
+    },1000)
+
+    function displayTime(second){
+      const sec = Math.floor(second % 60);
+      timeH.innerHTML = `${sec<10?'0':''}${sec}s`;
+    }
 
 startGame();
