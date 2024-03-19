@@ -1,4 +1,4 @@
-# Code-Quiz4
+# Code-Quiz
 
 ## Table of Contents
 
@@ -10,7 +10,7 @@
 
 ## About
 
-Code-Quiz4, as the name implies, is a short quiz I constructed. It is rather basic at the moment, but I intend to improve upon it by adding more features, functionality, and styling.
+Code-Quiz, as the name implies, is a short quiz I constructed. It is rather basic at the moment, but I intend to improve upon it by adding more features, functionality, and styling.
 
 ## Getting Started
 
