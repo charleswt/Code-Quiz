@@ -22,16 +22,16 @@ When playing the game, you will be timed and given a score. Upon reaching the en
 
 [Website Link](https://charleswt.github.io/Code-Quiz4/)
 
-[Git Repo](https://github.com/charleswt/Code-Quiz4)
-
 ## Contributing
 
 This project was developed by [Charles Tiffany](https://github.com/charleswt/).
 
 ## Screenshot
 
-![screenshot](./assets/images/sc.png)
+![screenshot](./assets/images/sc-1.png)
+![screenshot](./assets/images/sc-2.png)
+![screenshot](./assets/images/sc-3.png)
 
 ## License
 
-Please refer to the [LICENSE](https://github.com/charleswt/Code-Quiz4?tab=MIT-1-ov-file) file in the repository for details.
+Please refer to the [LICENSE](https://github.com/charleswt/Code-Quiz4/blob/main/LICENSE) file in the repository for details.
